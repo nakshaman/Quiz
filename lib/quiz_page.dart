@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/data/questions.dart';
+import 'package:quiz/data/review_data.dart';
 import 'package:quiz/screens/next_question_button.dart';
 import 'package:quiz/review_page.dart';
 import 'package:quiz/screens/show_options.dart';
@@ -18,11 +19,13 @@ class _QuizPageState extends State<QuizPage> {
   int currentQuestionIndex = 0;
   String? selectedAnswer;
   bool isQuizFinished = false;
+  List<ReviewData> reviewData = [];
 
   int correctAnswers = 0;
   int wrongAnswer = 0;
   // ------------------- Functions ------------------
   void selectAnswer(String answer) {
+    final question = questions[currentQuestionIndex];
     final correctAnswer = questions[currentQuestionIndex].answers[0];
     setState(() {
       selectedAnswer = answer;
@@ -31,6 +34,13 @@ class _QuizPageState extends State<QuizPage> {
       } else {
         wrongAnswer++;
       }
+      reviewData.add(
+        ReviewData(
+          question: question.question,
+          correctAnswer: correctAnswer,
+          userAnswer: answer,
+        ),
+      );
     });
   }
 
@@ -41,6 +51,7 @@ class _QuizPageState extends State<QuizPage> {
       selectedAnswer = null;
       correctAnswers = 0;
       wrongAnswer = 0;
+      reviewData.clear();
     });
   }
 
@@ -58,6 +69,7 @@ class _QuizPageState extends State<QuizPage> {
               correct: correctAnswers,
               wrong: wrongAnswer,
               resetQuiz: resetQuiz,
+              reviewData: reviewData,
             ),
           ),
         );
