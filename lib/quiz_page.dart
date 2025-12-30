@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/data/questions.dart';
+import 'package:quiz/next_question_button.dart';
+import 'package:quiz/options_widget.dart';
 import 'package:quiz/question_widget.dart';
 import 'package:quiz/screens/gradient_screen.dart';
 
@@ -13,6 +15,17 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   int currentQuestionIndex = 0;
   String? selectedAnswer;
+  bool isQuizFinished = false;
+  void goToNextQuestion() {
+    setState(() {
+      if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+        selectedAnswer = null;
+      } else {
+        isQuizFinished = true;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,44 +42,9 @@ class _QuizPageState extends State<QuizPage> {
               SizedBox(
                 height: size.width * 0.05,
               ),
-              ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: currentQuestion.answers.length,
-                itemBuilder: (context, index) {
-                  final ans = currentQuestion.answers[index];
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: SizedBox(
-                      height: 50,
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            selectedAnswer = ans;
-                            currentQuestionIndex++;
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(horizontal: 12),
-                        ),
-                        child: Text(
-                          ans,
-                          textAlign: TextAlign.center,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style:
-                              Theme.of(
-                                context,
-                              ).textTheme.titleMedium!.copyWith(
-                                color: Colors.black,
-                              ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
+              OptionsWidget(currentQuestion: currentQuestion),
+              if (selectedAnswer != null)
+                NextQuestionButton(onPressed: goToNextQuestion),
             ],
           ),
         ),

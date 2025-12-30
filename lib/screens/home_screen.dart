@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
               // Text widget for the tagline
               Text(
                 'Learn Flutter the fun way !',
-                style: Theme.of(context).textTheme.titleMedium,
+                style: Theme.of(context).textTheme.titleLarge,
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.10,
