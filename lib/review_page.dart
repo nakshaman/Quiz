@@ -54,14 +54,18 @@ class ReviewPage extends StatelessWidget {
                             border: Border.all(color: Colors.white),
                           ),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 data.question,
-                                style: Theme.of(context).textTheme.titleMedium!
-                                    .copyWith(
-                                      overflow: TextOverflow.ellipsis,
+                                style:
+                                    Theme.of(
+                                      context,
+                                    ).textTheme.titleMedium!.copyWith(
+                                      wordSpacing: 2,
+                                      letterSpacing: 1,
                                     ),
+                                softWrap: true,
+                                textAlign: TextAlign.center,
                               ),
                               const SizedBox(height: 8),
                               Text(
@@ -71,12 +75,16 @@ class ReviewPage extends StatelessWidget {
                                       color: getAnswerColor(data),
                                       fontWeight: FontWeight.bold,
                                     ),
+                                softWrap: true,
+                                textAlign: TextAlign.center,
                               ),
                               if (data.userAnswer != data.correctAnswer)
                                 Text(
                                   "Correct Answer: ${data.correctAnswer}",
                                   style: Theme.of(context).textTheme.bodyMedium!
                                       .copyWith(color: Colors.white70),
+                                  softWrap: true,
+                                  textAlign: TextAlign.center,
                                 ),
                             ],
                           ),
@@ -85,8 +93,9 @@ class ReviewPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: ElevatedButton(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(),
                       onPressed: () {
                         resetQuiz();
                         Navigator.pop(context);
@@ -95,7 +104,7 @@ class ReviewPage extends StatelessWidget {
                         "Restart Quiz",
                         style: Theme.of(
                           context,
-                        ).textTheme.titleMedium!.copyWith(color: Colors.black),
+                        ).textTheme.titleMedium,
                       ),
                     ),
                   ),
