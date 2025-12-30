@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/model/quiz_question.dart';
 
-class OptionsWidget extends StatefulWidget {
-  const OptionsWidget({required this.currentQuestion, super.key});
+class ShowOptions extends StatelessWidget {
+  const ShowOptions({
+    required this.currentQuestion,
+    required this.selectedAnswer,
+    required this.onSelectAnswer,
+    super.key,
+  });
   final QuizQuestion currentQuestion;
-  @override
-  State<OptionsWidget> createState() => _OptionsWidgetState();
-}
+  final String? selectedAnswer;
+  final Function(String) onSelectAnswer;
 
-class _OptionsWidgetState extends State<OptionsWidget> {
-  bool isAnswered = false;
-  int currentQuestionIndex = 0;
-  String? selectedAnswer;
-  bool isQuizFinished = false;
   Color setBackgroundColor(
     String? selectedAnswer,
     String ans,
@@ -33,9 +32,9 @@ class _OptionsWidgetState extends State<OptionsWidget> {
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemCount: widget.currentQuestion.answers.length,
+      itemCount: currentQuestion.answers.length,
       itemBuilder: (context, index) {
-        final ans = widget.currentQuestion.answers[index];
+        final ans = currentQuestion.answers[index];
         return Padding(
           padding: const EdgeInsets.only(bottom: 12),
           child: SizedBox(
@@ -43,16 +42,16 @@ class _OptionsWidgetState extends State<OptionsWidget> {
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () {
-                setState(() {
-                  selectedAnswer = ans;
-                  isAnswered = true;
-                });
+                if (selectedAnswer != null) {
+                  return;
+                }
+                onSelectAnswer(ans);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: setBackgroundColor(
                   selectedAnswer,
                   ans,
-                  widget.currentQuestion,
+                  currentQuestion,
                 ),
                 padding: EdgeInsets.symmetric(horizontal: 12),
               ),

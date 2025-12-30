@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/data/questions.dart';
-import 'package:quiz/next_question_button.dart';
-import 'package:quiz/options_widget.dart';
-import 'package:quiz/question_widget.dart';
+import 'package:quiz/screens/next_question_button.dart';
+import 'package:quiz/review_page.dart';
+import 'package:quiz/screens/show_options.dart';
+import 'package:quiz/screens/show_question.dart';
 import 'package:quiz/screens/gradient_screen.dart';
 
 class QuizPage extends StatefulWidget {
@@ -13,9 +14,36 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  // ----------------- Variables------------------
   int currentQuestionIndex = 0;
   String? selectedAnswer;
   bool isQuizFinished = false;
+
+  int correctAnswers = 0;
+  int wrongAnswer = 0;
+  // ------------------- Functions ------------------
+  void selectAnswer(String answer) {
+    final correctAnswer = questions[currentQuestionIndex].answers[0];
+    setState(() {
+      selectedAnswer = answer;
+      if (answer == correctAnswer) {
+        correctAnswers++;
+      } else {
+        wrongAnswer++;
+      }
+    });
+  }
+
+  void resetQuiz() {
+    setState(() {
+      currentQuestionIndex = 0;
+      isQuizFinished = false;
+      selectedAnswer = null;
+      correctAnswers = 0;
+      wrongAnswer = 0;
+    });
+  }
+
   void goToNextQuestion() {
     setState(() {
       if (currentQuestionIndex < questions.length - 1) {
@@ -23,6 +51,16 @@ class _QuizPageState extends State<QuizPage> {
         selectedAnswer = null;
       } else {
         isQuizFinished = true;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ReviewPage(
+              correct: correctAnswers,
+              wrong: wrongAnswer,
+              resetQuiz: resetQuiz,
+            ),
+          ),
+        );
       }
     });
   }
@@ -38,11 +76,17 @@ class _QuizPageState extends State<QuizPage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              QuestionWidget(currentQuestion: currentQuestion),
+              ShowQuestion(
+                currentQuestion: currentQuestion,
+              ),
               SizedBox(
                 height: size.width * 0.05,
               ),
-              OptionsWidget(currentQuestion: currentQuestion),
+              ShowOptions(
+                currentQuestion: currentQuestion,
+                selectedAnswer: selectedAnswer,
+                onSelectAnswer: selectAnswer,
+              ),
               if (selectedAnswer != null)
                 NextQuestionButton(onPressed: goToNextQuestion),
             ],

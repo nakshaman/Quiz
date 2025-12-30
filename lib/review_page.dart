@@ -22,29 +22,19 @@ class ReviewPage extends StatelessWidget {
             children: [
               Text(
                 "Quiz Completed ",
-                style: GoogleFonts.lato(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: Theme.of(context).textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 20),
               Text(
                 "Correct Answers: $correct",
-                style: GoogleFonts.lato(
-                  color: Colors.white,
-                  fontSize: 18,
-                ),
+                style: Theme.of(context).textTheme.titleMedium,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 10),
               Text(
                 "Wrong Answers: $wrong",
-                style: GoogleFonts.lato(
-                  color: Colors.white,
-                  fontSize: 18,
-                ),
+                style: Theme.of(context).textTheme.titleMedium,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.05),
@@ -63,7 +53,10 @@ class ReviewPage extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  onPressed: resetQuiz,
+                  onPressed: () {
+                    resetQuiz();
+                    Navigator.pop(context);
+                  },
                   child: Text("Restart Quiz"),
                 ),
               ),

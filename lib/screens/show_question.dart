@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:quiz/model/quiz_question.dart';
 
-class QuestionWidget extends StatelessWidget {
-  const QuestionWidget({required this.currentQuestion, super.key});
-  final currentQuestion;
+class ShowQuestion extends StatelessWidget {
+  const ShowQuestion({
+    required this.currentQuestion,
+    super.key,
+  });
+  final QuizQuestion currentQuestion;
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
