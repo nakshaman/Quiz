@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/data/questions.dart';
-import 'package:quiz/data/review_data.dart';
+import 'package:quiz/model/review_data.dart';
 import 'package:quiz/screens/next_question_button.dart';
 import 'package:quiz/pages/review_page.dart';
 import 'package:quiz/screens/show_options.dart';
@@ -24,7 +24,7 @@ class _QuizPageState extends State<QuizPage> {
   int correctAnswers = 0;
   int wrongAnswer = 0;
   // ------------------- Functions ------------------
-  void selectAnswer(String answer) {
+  void onSelectAnswer(String answer) {
     final question = questions[currentQuestionIndex];
     final correctAnswer = questions[currentQuestionIndex].answers[0];
     setState(() {
@@ -97,7 +97,7 @@ class _QuizPageState extends State<QuizPage> {
               ShowOptions(
                 currentQuestion: currentQuestion,
                 selectedAnswer: selectedAnswer,
-                onSelectAnswer: selectAnswer,
+                onSelectAnswer: onSelectAnswer,
               ),
               if (selectedAnswer != null)
                 NextQuestionButton(onPressed: goToNextQuestion),

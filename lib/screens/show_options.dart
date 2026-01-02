@@ -29,12 +29,13 @@ class ShowOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final shuffledAnswers = List.of(currentQuestion.answers)..shuffle();
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemCount: currentQuestion.answers.length,
+      itemCount: shuffledAnswers.length,
       itemBuilder: (context, index) {
-        final ans = currentQuestion.answers[index];
+        final ans = shuffledAnswers[index];
         return Padding(
           padding: const EdgeInsets.only(bottom: 12),
           child: SizedBox(
