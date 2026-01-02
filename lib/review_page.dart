@@ -39,6 +39,13 @@ class ReviewPage extends StatelessWidget {
                       context,
                     ).textTheme.titleLarge,
                   ),
+                  Text(
+                    'You choosed $correct Correct answers and $wrong Incorrect answers.',
+                    style: Theme.of(
+                      context,
+                    ).textTheme.titleLarge!.copyWith(color: Colors.black54),
+                    textAlign: TextAlign.center,
+                  ),
                   const SizedBox(height: 20),
                   Expanded(
                     child: ListView.builder(
