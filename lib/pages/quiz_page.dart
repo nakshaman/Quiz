@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quiz/data/questions.dart';
 import 'package:quiz/data/review_data.dart';
 import 'package:quiz/screens/next_question_button.dart';
-import 'package:quiz/review_page.dart';
+import 'package:quiz/pages/review_page.dart';
 import 'package:quiz/screens/show_options.dart';
 import 'package:quiz/screens/show_question.dart';
 import 'package:quiz/screens/gradient_screen.dart';
