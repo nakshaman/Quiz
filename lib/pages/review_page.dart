@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz/data/questions.dart';
 import 'package:quiz/model/review_data.dart';
 import 'package:quiz/widgets/gradient_screen.dart';
 
@@ -43,7 +44,7 @@ class ReviewPage extends StatelessWidget {
                     height: MediaQuery.of(context).size.width * 0.05,
                   ),
                   Text(
-                    'You choosed $correct Correct answers and $wrong Incorrect answers.',
+                    'You choosed $correct Correct answers out of ${questions.length} Questions.',
                     style: Theme.of(
                       context,
                     ).textTheme.titleLarge!.copyWith(color: Colors.white),
