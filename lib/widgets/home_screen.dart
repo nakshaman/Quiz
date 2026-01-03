@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quiz/screens/gradient_screen.dart';
+import 'package:quiz/widgets/gradient_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -52,7 +52,7 @@ class HomeScreen extends StatelessWidget {
                   'Start Quiz',
                   style: Theme.of(
                     context,
-                  ).textTheme.titleLarge!.copyWith(color: Colors.black),
+                  ).textTheme.titleMedium!.copyWith(color: Colors.black),
                 ),
                 icon: const Icon(
                   Icons.arrow_right_alt,

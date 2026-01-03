@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/model/review_data.dart';
-import 'package:quiz/screens/gradient_screen.dart';
+import 'package:quiz/widgets/gradient_screen.dart';
 
 class ReviewPage extends StatelessWidget {
   const ReviewPage({
@@ -72,7 +72,7 @@ class ReviewPage extends StatelessWidget {
                           child: Column(
                             children: [
                               Text(
-                                data.question,
+                                '${index + 1}. ${data.question}',
                                 style:
                                     Theme.of(
                                       context,

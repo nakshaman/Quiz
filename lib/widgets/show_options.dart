@@ -6,11 +6,13 @@ class ShowOptions extends StatelessWidget {
     required this.currentQuestion,
     required this.selectedAnswer,
     required this.onSelectAnswer,
+    required this.shuffledAnswers,
     super.key,
   });
   final QuizQuestion currentQuestion;
   final String? selectedAnswer;
   final Function(String) onSelectAnswer;
+  final List<String> shuffledAnswers;
 
   Color setBackgroundColor(
     String? selectedAnswer,
@@ -29,7 +31,6 @@ class ShowOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final shuffledAnswers = List.of(currentQuestion.answers)..shuffle();
     return ListView.builder(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -59,7 +60,7 @@ class ShowOptions extends StatelessWidget {
               child: Text(
                 ans,
                 textAlign: TextAlign.center,
-                maxLines: 2,
+                maxLines: 3,
                 overflow: TextOverflow.ellipsis,
                 style:
                     Theme.of(
