@@ -85,7 +85,7 @@ class ReviewPage extends StatelessWidget {
                               ),
                               const SizedBox(height: 8),
                               Text(
-                                "Your Answer: ${data.userAnswer}",
+                                "Your Answer : ${data.userAnswer}",
                                 style: Theme.of(context).textTheme.bodyLarge!
                                     .copyWith(
                                       color: getAnswerColor(data),
@@ -96,7 +96,7 @@ class ReviewPage extends StatelessWidget {
                               ),
                               if (data.userAnswer != data.correctAnswer)
                                 Text(
-                                  "Correct Answer: ${data.correctAnswer}",
+                                  "Correct Answer : ${data.correctAnswer}",
                                   style: Theme.of(context).textTheme.bodyMedium!
                                       .copyWith(color: Colors.white70),
                                   softWrap: true,
